@@ -39,8 +39,12 @@ def get_existing_snapshots(scheduled_snapshot):
         all_volume_snapshots = []
         logging.exception('Unable to fetch existing volume snapshots')
     if VS_CRD_VERSION == 'v1alpha1':
-        filtered_snapshots = list(filter(lambda s: s.get('spec', {}).get('source', {}).get('name') == scheduled_snapshot_pvc and s.get(
-            'spec', {}).get('source', {}).get('kind') == 'PersistentVolumeClaim', all_volume_snapshots))
+        filtered_snapshots = list(filter(
+            lambda s: (
+                s.get('spec', {}).get('source', {}).get('name') == scheduled_snapshot_pvc
+                and s.get('spec', {}).get('source', {}).get('kind') == 'PersistentVolumeClaim'
+            ), all_volume_snapshots
+        ))
     else:
         filtered_snapshots = list(filter(lambda s: s.get('spec', {}).get('source', {}).get(
             'persistentVolumeClaimName') == scheduled_snapshot_pvc, all_volume_snapshots))
@@ -53,20 +57,22 @@ def get_existing_snapshots(scheduled_snapshot):
 def new_snapshot_needed(scheduled_snapshot, existing_snapshots):
     time_delta = timedelta(hours=scheduled_snapshot.get(
         'spec', {}).get('snapshotFrequency'))
-    return len(existing_snapshots) == 0 or datetime.now(timezone.utc) >= dateutil.parser.parse(existing_snapshots[-1].get('metadata', {}).get('creationTimestamp')) + time_delta
+    return (len(existing_snapshots) == 0
+            or datetime.now(timezone.utc) >=
+            dateutil.parser.parse(existing_snapshots[-1].get('metadata', {}).get('creationTimestamp')) + time_delta)
 
 
 def create_new_snapshot(scheduled_snapshot):
-    new_snapshot_name = f"{scheduled_snapshot.get('spec', {}).get('persistentVolumeClaimName')}-{str(int(time.time()))}"
+    scheduled_snapshot_name = scheduled_snapshot.get('spec', {}).get('persistentVolumeClaimName')
+    new_snapshot_name = f'{scheduled_snapshot_name}-{str(int(time.time()))}'
     new_snapshot_namespace = scheduled_snapshot.get(
         'metadata', {}).get('namespace')
     new_snapshot_labels = scheduled_snapshot.get(
         'spec', {}).get('snapshotLabels', {})
-    logging.info(
-        f'Creating snapshot {new_snapshot_name} in namespace {new_snapshot_namespace}')
-    volume_snapshot_content = {
+    logging.info(f'Creating snapshot {new_snapshot_name} in namespace {new_snapshot_namespace}')
+    volume_snapshot_body = {
         'apiVersion': f'{VS_CRD_GROUP}/{VS_CRD_VERSION}',
-        'kind': VS_CRD_KIND,
+        'kind': VSC_CRD_KIND,
         'metadata': {
             'name': new_snapshot_name,
             'namespace': new_snapshot_namespace,
@@ -77,13 +83,13 @@ def create_new_snapshot(scheduled_snapshot):
         }
     }
     if VS_CRD_VERSION == 'v1alpha1':
-        volume_snapshot_content['spec']['source'] = {
+        volume_snapshot_body['spec']['source'] = {
             'apiGroup': None,
             'kind': 'PersistentVolumeClaim',
             'name': scheduled_snapshot.get('spec', {}).get('persistentVolumeClaimName')
         }
     else:
-        volume_snapshot_content['spec']['source'] = {
+        volume_snapshot_body['spec']['source'] = {
             'persistentVolumeClaimName': scheduled_snapshot.get('spec', {}).get('persistentVolumeClaimName')
         }
     try:
@@ -92,7 +98,7 @@ def create_new_snapshot(scheduled_snapshot):
             VS_CRD_VERSION,
             scheduled_snapshot.get('metadata', {}).get('namespace'),
             VS_CRD_PLURAL,
-            volume_snapshot_content)
+            volume_snapshot_body)
     except kubernetes.client.rest.ApiException as e:
         logging.exception(
             f'Unable to create volume snapshot {new_snapshot_name} in namespace {new_snapshot_namespace}')
@@ -105,12 +111,13 @@ def cleanup_old_snapshots(scheduled_snapshot, existing_snapshots):
         oldest_retention_time = datetime.now(
             timezone.utc) - timedelta(hours=snapshotRetention)
         for existing_snapshot in existing_snapshots:
-            if dateutil.parser.parse(existing_snapshot.get('metadata', {}).get('creationTimestamp')) < oldest_retention_time:
+            creation_timestamp = existing_snapshot.get('metadata', {}).get('creationTimestamp')
+            if dateutil.parser.parse(creation_timestamp) < oldest_retention_time:
                 snapshot_namespace = scheduled_snapshot.get(
                     'metadata', {}).get('namespace')
                 snapshot_name = existing_snapshot.get(
                     'metadata', {}).get('name')
-                if VS_CRD_VERSION == 'v1alpha1':
+                if VSC_CRD_VERSION == 'v1alpha1':
                     snapshot_content_name = existing_snapshot.get(
                         'spec', {}).get('snapshotContentName')
                 else:
@@ -144,7 +151,10 @@ def main():
     for namespace in v1.list_namespace().items:
         if namespace.status.phase == 'Active':
             scheduled_snapshots = custom_api.list_namespaced_custom_object(
-                SVS_CRD_GROUP, SVS_CRD_VERSION, namespace.metadata.name, SVS_CRD_PLURAL).get('items', [])
+                SVS_CRD_GROUP,
+                SVS_CRD_VERSION,
+                namespace.metadata.name,
+                SVS_CRD_PLURAL).get('items', [])
             for scheduled_snapshot in scheduled_snapshots:
                 existing_snapshots = get_existing_snapshots(scheduled_snapshot)
                 if new_snapshot_needed(scheduled_snapshot, existing_snapshots):
