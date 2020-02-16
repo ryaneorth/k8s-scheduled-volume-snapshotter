@@ -2,8 +2,10 @@
 Using this Helm chart is the easiest way to install the scheduled volume snapshotter. To install with the base configuration, execute the following command:
 
 ```
-helm upgrade --install scheduled-volume-snapshotter ./helm/charts/scheduled-volume-snapshotter
+helm upgrade --install scheduled-volume-snapshotter \
+	https://github.com/ryaneorth/scheduled-volume-snapshotter/releases/download/v0.1/helm-chart.tgz
 ```
+
 
 Values which can be overridden are documented below.
 
