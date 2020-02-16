@@ -1,0 +1,20 @@
+image:
+  repository: ryaneorth/scheduled-volume-snapshotter
+  pullPolicy: Always
+
+schedule: "*/30 * * * *"
+
+rbac:
+  enabled: true
+
+createCustomResource: true
+
+logLevel: INFO
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi

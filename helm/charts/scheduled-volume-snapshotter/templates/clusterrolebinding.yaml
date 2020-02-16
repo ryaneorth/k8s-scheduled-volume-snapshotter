@@ -1,0 +1,16 @@
+{{- if .Values.rbac.enabled -}}
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ include "scheduled-snapshot-operator.name" . }}
+  labels:
+    {{- include "scheduled-snapshot-operator.labels" . | nindent 4 }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "scheduled-snapshot-operator.name" . }}
+    namespace: {{ .Release.Namespace }}
+roleRef:
+  kind: ClusterRole
+  name: {{ include "scheduled-snapshot-operator.name" . }}
+  apiGroup: rbac.authorization.k8s.io
+{{- end }}

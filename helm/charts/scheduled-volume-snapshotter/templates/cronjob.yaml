@@ -1,0 +1,25 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ include "scheduled-snapshot-operator.name" . }}
+  labels:
+    {{- include "scheduled-snapshot-operator.labels" . | nindent 4 }}
+spec:
+  schedule: "{{ .Values.schedule }}"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: {{ include "scheduled-snapshot-operator.name" . }}
+          containers:
+            - name: {{ .Chart.Name }}
+              image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              resources:
+{{ toYaml .Values.resources | indent 16 }}
+              env:
+                - name: LOG_LEVEL
+                  value: "{{ .Values.logLevel }}"
+
+          restartPolicy: Never

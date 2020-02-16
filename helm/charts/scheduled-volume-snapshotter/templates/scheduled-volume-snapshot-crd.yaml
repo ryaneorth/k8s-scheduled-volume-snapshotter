@@ -1,0 +1,50 @@
+{{- if .Values.createCustomResource -}}
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: scheduledvolumesnapshots.k8s.ryanorth.io
+spec:
+  group: k8s.ryanorth.io
+  version: v1beta1
+  versions:
+    - name: v1beta1
+      served: true
+      storage: true
+  scope: Namespaced
+  names:
+    plural: scheduledvolumesnapshots
+    singular: scheduledvolumesnapshot
+    kind: ScheduledVolumeSnapshot
+    listKind: ScheduledVolumeSnapshotList
+    shortNames:
+      - svs
+  validation:
+    openAPIV3Schema:
+      type: object
+      properties:
+        spec:
+          type: object
+          properties:
+            snapshotClassName:
+              description: The name of the VolumeSnapshotClass to be used for generating the snapshot.
+              type: string
+            persistentVolumeClaimName:
+              description: The name of the persistent volume claim snapshots should be taken against.
+              type: string
+            snapshotFrequency:
+              description: How often (in hours) a snapshot should be created against the persistent volume.
+              type: integer
+            snapshotRetention:
+              description: How long (in hours) a snapshot should be retained. For indefinite retention, set this value to -1.
+              type: integer
+            snapshotLabels:
+              description: Labels to include on the VolumeSnapshot objects.
+              type: object
+              additionalProperties:
+                type: string
+          required:
+            - snapshotClassName
+            - persistentVolumeClaimName
+            - snapshotFrequency
+            - snapshotRetention
+{{- end }}
