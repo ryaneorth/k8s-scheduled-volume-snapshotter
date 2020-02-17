@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta, timezone
 import dateutil.parser
+import humanfriendly
 import kubernetes
 import logging
 import time
@@ -27,8 +28,7 @@ custom_api = kubernetes.client.CustomObjectsApi()
 
 
 def get_existing_snapshots(scheduled_snapshot):
-    scheduled_snapshot_pvc = scheduled_snapshot.get(
-        'spec', {}).get('persistentVolumeClaimName')
+    scheduled_snapshot_pvc = scheduled_snapshot.get('spec', {}).get('persistentVolumeClaimName')
     try:
         all_volume_snapshots = custom_api.list_namespaced_custom_object(
             VS_CRD_GROUP,
@@ -55,20 +55,27 @@ def get_existing_snapshots(scheduled_snapshot):
 
 
 def new_snapshot_needed(scheduled_snapshot, existing_snapshots):
-    time_delta = timedelta(hours=scheduled_snapshot.get(
-        'spec', {}).get('snapshotFrequency'))
-    return (len(existing_snapshots) == 0
+    try:
+        raw_snapshot_frequency = scheduled_snapshot.get('spec', {}).get('snapshotFrequency')
+        if isinstance(raw_snapshot_frequency, int):
+            raw_snapshot_frequency = f'{str(raw_snapshot_frequency)}h'
+        snapshot_frequency_in_seconds = int(humanfriendly.parse_timespan(raw_snapshot_frequency))
+        time_delta = timedelta(seconds=snapshot_frequency_in_seconds)
+        snapshot_needed = (
+            len(existing_snapshots) == 0
             or datetime.now(timezone.utc) >=
             dateutil.parser.parse(existing_snapshots[-1].get('metadata', {}).get('creationTimestamp')) + time_delta)
+    except humanfriendly.InvalidTimespan:
+        logging.exception(f"Unable to parse snapshotFrequency for {scheduled_snapshot.get('metadata', {}).get('name')}")
+        snapshot_needed = False
+    return snapshot_needed
 
 
 def create_new_snapshot(scheduled_snapshot):
-    scheduled_snapshot_name = scheduled_snapshot.get('spec', {}).get('persistentVolumeClaimName')
-    new_snapshot_name = f'{scheduled_snapshot_name}-{str(int(time.time()))}'
-    new_snapshot_namespace = scheduled_snapshot.get(
-        'metadata', {}).get('namespace')
-    new_snapshot_labels = scheduled_snapshot.get(
-        'spec', {}).get('snapshotLabels', {})
+    pvc_name = scheduled_snapshot.get('spec', {}).get('persistentVolumeClaimName')
+    new_snapshot_name = f'{pvc_name}-{str(int(time.time()))}'
+    new_snapshot_namespace = scheduled_snapshot.get('metadata', {}).get('namespace')
+    new_snapshot_labels = scheduled_snapshot.get('spec', {}).get('snapshotLabels', {})
     logging.info(f'Creating snapshot {new_snapshot_name} in namespace {new_snapshot_namespace}')
     volume_snapshot_body = {
         'apiVersion': f'{VS_CRD_GROUP}/{VS_CRD_VERSION}',
@@ -86,11 +93,11 @@ def create_new_snapshot(scheduled_snapshot):
         volume_snapshot_body['spec']['source'] = {
             'apiGroup': None,
             'kind': 'PersistentVolumeClaim',
-            'name': scheduled_snapshot.get('spec', {}).get('persistentVolumeClaimName')
+            'name': pvc_name
         }
     else:
         volume_snapshot_body['spec']['source'] = {
-            'persistentVolumeClaimName': scheduled_snapshot.get('spec', {}).get('persistentVolumeClaimName')
+            'persistentVolumeClaimName': pvc_name
         }
     try:
         custom_api.create_namespaced_custom_object(
@@ -100,16 +107,20 @@ def create_new_snapshot(scheduled_snapshot):
             VS_CRD_PLURAL,
             volume_snapshot_body)
     except kubernetes.client.rest.ApiException:
-        logging.exception(
-            f'Unable to create volume snapshot {new_snapshot_name} in namespace {new_snapshot_namespace}')
+        logging.exception(f'Unable to create volume snapshot {new_snapshot_name} in namespace {new_snapshot_namespace}')
 
 
 def cleanup_old_snapshots(scheduled_snapshot, existing_snapshots):
-    snapshotRetention = scheduled_snapshot.get(
-        'spec', {}).get('snapshotRetention', -1)
-    if snapshotRetention > 0:
-        oldest_retention_time = datetime.now(
-            timezone.utc) - timedelta(hours=snapshotRetention)
+    try:
+        raw_snapshot_retention = scheduled_snapshot.get('spec', {}).get('snapshotRetention', -1)
+        if isinstance(raw_snapshot_retention, int):
+            raw_snapshot_retention = f'{str(raw_snapshot_retention)}h'
+        snapshot_retention_in_seconds = int(humanfriendly.parse_timespan(raw_snapshot_retention))
+    except humanfriendly.InvalidTimespan:
+        logging.exception(f"Unable to parse snapshotRetention for {scheduled_snapshot.get('metadata', {}).get('name')}")
+        snapshot_retention_in_seconds = -1
+    if snapshot_retention_in_seconds > 0:
+        oldest_retention_time = datetime.now(timezone.utc) - timedelta(seconds=snapshot_retention_in_seconds)
         for existing_snapshot in existing_snapshots:
             creation_timestamp = existing_snapshot.get('metadata', {}).get('creationTimestamp')
             if dateutil.parser.parse(creation_timestamp) < oldest_retention_time:

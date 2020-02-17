@@ -2,6 +2,8 @@ image:
   repository: ryaneorth/scheduled-volume-snapshotter
   pullPolicy: Always
 
+nameOverride: ""
+
 schedule: "*/30 * * * *"
 
 rbac:

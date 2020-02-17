@@ -32,11 +32,19 @@ spec:
               description: The name of the persistent volume claim snapshots should be taken against.
               type: string
             snapshotFrequency:
-              description: How often (in hours) a snapshot should be created against the persistent volume.
-              type: integer
+              description: >
+                How often a snapshot should be created against the persistent volume. Value can be provided
+                as a string (e.g. 30m, 5h, 4d, 1w, etc.) or an integer (interpretted in hours).
+              oneOf:
+                - type: integer
+                - type: string
             snapshotRetention:
-              description: How long (in hours) a snapshot should be retained. For indefinite retention, set this value to -1.
-              type: integer
+              description: >
+                How long a snapshot should be retained. Value can be provided as a string (e.g. 30m, 5h, 4d, 1w, etc.)
+                or an integer (interpretted in hours). Negative values indicate indefinite retention.
+              oneOf:
+                - type: integer
+                - type: string
             snapshotLabels:
               description: Labels to include on the VolumeSnapshot objects.
               type: object
