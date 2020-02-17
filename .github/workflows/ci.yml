@@ -1,0 +1,42 @@
+name: ci
+
+on: [push]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Lint Dockerfile with hadolint
+        uses: brpaz/hadolint-action@v1.0.2
+        with:
+          dockerfile: Dockerfile
+      - name: Lint Helm chart
+        uses: WyriHaximus/github-action-helm3@v1
+        with:
+          exec: helm lint ./helm/charts/scheduled-volume-snapshotter --strict
+      - name: Lint Python with flake8
+        run: |
+          pip install flake8
+          flake8 --max-line-length=120 .
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+#     - name: Test with pytest
+#       run: |
+#         pip install pytest
+#         pytest

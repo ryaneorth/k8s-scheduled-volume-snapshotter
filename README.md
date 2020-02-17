@@ -1,4 +1,4 @@
-[![main](https://github.com/ryaneorth/scheduled-volume-snapshotter/workflows/main/badge.svg?branch=master)](https://github.com/ryaneorth/scheduled-volume-snapshotter/actions?query=workflow%3Amain)
+[![ci](https://github.com/ryaneorth/scheduled-volume-snapshotter/workflows/ci/badge.svg?branch=master)](https://github.com/ryaneorth/scheduled-volume-snapshotter/actions?query=workflow%ci)
 
 # Kubernetes Scheduled Volume Snapshotter
 
