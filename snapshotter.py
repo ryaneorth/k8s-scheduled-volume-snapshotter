@@ -35,7 +35,7 @@ def get_existing_snapshots(scheduled_snapshot):
             VS_CRD_VERSION,
             scheduled_snapshot.get('metadata', {}).get('namespace'),
             VS_CRD_PLURAL).get('items', [])
-    except kubernetes.client.rest.ApiException as e:
+    except kubernetes.client.rest.ApiException:
         all_volume_snapshots = []
         logging.exception('Unable to fetch existing volume snapshots')
     if VS_CRD_VERSION == 'v1alpha1':
@@ -72,7 +72,7 @@ def create_new_snapshot(scheduled_snapshot):
     logging.info(f'Creating snapshot {new_snapshot_name} in namespace {new_snapshot_namespace}')
     volume_snapshot_body = {
         'apiVersion': f'{VS_CRD_GROUP}/{VS_CRD_VERSION}',
-        'kind': VSC_CRD_KIND,
+        'kind': VS_CRD_KIND,
         'metadata': {
             'name': new_snapshot_name,
             'namespace': new_snapshot_namespace,
@@ -99,7 +99,7 @@ def create_new_snapshot(scheduled_snapshot):
             scheduled_snapshot.get('metadata', {}).get('namespace'),
             VS_CRD_PLURAL,
             volume_snapshot_body)
-    except kubernetes.client.rest.ApiException as e:
+    except kubernetes.client.rest.ApiException:
         logging.exception(
             f'Unable to create volume snapshot {new_snapshot_name} in namespace {new_snapshot_namespace}')
 
@@ -142,7 +142,7 @@ def cleanup_old_snapshots(scheduled_snapshot, existing_snapshots):
                         VS_CRD_PLURAL,
                         snapshot_name,
                         {})
-                except kubernetes.client.rest.ApiException as e:
+                except kubernetes.client.rest.ApiException:
                     logging.exception(
                         f'Unable to delete volume snapshot {snapshot_name} in namespace {snapshot_namespace}')
 
@@ -165,5 +165,5 @@ def main():
 if __name__ == '__main__':
     try:
         main()
-    except kubernetes.client.rest.ApiException as e:
+    except kubernetes.client.rest.ApiException:
         logging.exception('Unhandled ApiException encountered')
