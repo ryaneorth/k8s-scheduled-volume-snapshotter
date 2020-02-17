@@ -1,3 +1,5 @@
+[![main](https://github.com/ryaneorth/scheduled-volume-snapshotter/workflows/main/badge.svg?branch=master)](https://github.com/ryaneorth/scheduled-volume-snapshotter/actions?query=workflow%3Amain)
+
 # Kubernetes Scheduled Volume Snapshotter
 
 ## Overview
