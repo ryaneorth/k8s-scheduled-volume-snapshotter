@@ -9,8 +9,6 @@ schedule: "*/15 * * * *"
 rbac:
   enabled: true
 
-createCustomResource: true
-
 logLevel: INFO
 
 resources:
