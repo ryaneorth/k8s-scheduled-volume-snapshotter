@@ -1,4 +1,4 @@
-[![CI](https://github.com/ryaneorth/scheduled-volume-snapshotter/workflows/CI/badge.svg?branch=master)](https://github.com/ryaneorth/scheduled-volume-snapshotter/actions?query=workflow%CI)
+[![CI](https://github.com/ryaneorth/scheduled-volume-snapshotter/workflows/CI/badge.svg?branch=master)](https://github.com/ryaneorth/scheduled-volume-snapshotter/actions?query=workflow%3ACI)
 
 # Kubernetes Scheduled Volume Snapshotter
 
@@ -15,7 +15,7 @@ The easiest way to deploy this operator is using the provided [Helm chart](./hel
 
 ```
 helm upgrade --install scheduled-volume-snapshotter \
-	https://github.com/ryaneorth/scheduled-volume-snapshotter/releases/download/v0.1/helm-chart.tgz
+	https://github.com/ryaneorth/scheduled-volume-snapshotter/releases/download/v0.2/helm-chart.tgz
 ```
 
 ## Scheduling snapshots
