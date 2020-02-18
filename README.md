@@ -37,4 +37,4 @@ spec:
     secondLabel: anotherLabelValue
 ```
 
-See the `ScheduledVolumeSnapshot` [custom resource definition](./helm/charts/scheduled-volume-snapshotter/templates/scheduled-volume-snapshot-crd.yaml) for further details.
+See the `ScheduledVolumeSnapshot` [custom resource definition](./helm/charts/scheduled-volume-snapshotter/crds/scheduled-volume-snapshot-crd.yaml) for further details.
