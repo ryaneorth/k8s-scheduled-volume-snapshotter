@@ -16,7 +16,7 @@ jobs:
         with:
           dockerfile: Dockerfile
       - name: Lint Helm chart
-        uses: WyriHaximus/github-action-helm3@v1
+        uses: WyriHaximus/github-action-helm3@v1.0.0
         with:
           exec: helm lint ./helm/charts/scheduled-volume-snapshotter --strict
       - name: Lint Python with flake8
