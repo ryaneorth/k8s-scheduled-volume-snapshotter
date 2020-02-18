@@ -63,8 +63,8 @@ def new_snapshot_needed(scheduled_snapshot, existing_snapshots):
         time_delta = timedelta(seconds=snapshot_frequency_in_seconds)
         snapshot_needed = (
             len(existing_snapshots) == 0
-            or datetime.now(timezone.utc) >=
-            dateutil.parser.parse(existing_snapshots[-1].get('metadata', {}).get('creationTimestamp')) + time_delta)
+            or datetime.now(timezone.utc)
+            >= dateutil.parser.parse(existing_snapshots[-1].get('metadata', {}).get('creationTimestamp')) + time_delta)
     except humanfriendly.InvalidTimespan:
         logging.exception(f"Unable to parse snapshotFrequency for {scheduled_snapshot.get('metadata', {}).get('name')}")
         snapshot_needed = False

@@ -1,10 +1,10 @@
 image:
   repository: ryaneorth/scheduled-volume-snapshotter
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 
 nameOverride: ""
 
-schedule: "*/30 * * * *"
+schedule: "*/15 * * * *"
 
 rbac:
   enabled: true
