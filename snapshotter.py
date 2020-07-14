@@ -18,10 +18,6 @@ VS_CRD_VERSION = 'v1alpha1' if int(K8S_VERSION_INFO.major) == 1 and int(
     K8S_VERSION_INFO.minor) < 17 else 'v1beta1'
 VS_CRD_PLURAL = 'volumesnapshots'
 VS_CRD_KIND = 'VolumeSnapshot'
-VSC_CRD_GROUP = 'snapshot.storage.k8s.io'
-VSC_CRD_VERSION = 'v1alpha1' if int(K8S_VERSION_INFO.major) == 1 and int(
-    K8S_VERSION_INFO.minor) < 17 else 'v1beta1'
-VSC_CRD_PLURAL = 'volumesnapshotcontents'
 
 v1 = kubernetes.client.CoreV1Api()
 custom_api = kubernetes.client.CustomObjectsApi()
@@ -128,24 +124,9 @@ def cleanup_old_snapshots(scheduled_snapshot, existing_snapshots):
                     'metadata', {}).get('namespace')
                 snapshot_name = existing_snapshot.get(
                     'metadata', {}).get('name')
-                if VSC_CRD_VERSION == 'v1alpha1':
-                    snapshot_content_name = existing_snapshot.get(
-                        'spec', {}).get('snapshotContentName')
-                else:
-                    snapshot_content_name = existing_snapshot.get(
-                        'status', {}).get('boundVolumeSnapshotContentName')
                 logging.info(
                     f'Deleting snapshot {snapshot_name} from namespace {snapshot_namespace}')
                 try:
-                    if snapshot_content_name:
-                        # delete the associated VolumeSnapshotContent object
-                        custom_api.delete_cluster_custom_object(
-                            VSC_CRD_GROUP,
-                            VSC_CRD_VERSION,
-                            VSC_CRD_PLURAL,
-                            snapshot_content_name,
-                            {})
-                    # delete the VolumeSnapshot object
                     custom_api.delete_namespaced_custom_object(
                         VS_CRD_GROUP,
                         VS_CRD_VERSION,

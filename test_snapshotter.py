@@ -204,12 +204,6 @@ class Snapshotter(unittest.TestCase):
 
         snapshotter.main()
 
-        kubernetes.client.CustomObjectsApi.return_value.delete_cluster_custom_object.assert_called_with(
-            snapshotter.VSC_CRD_GROUP,
-            snapshotter.VSC_CRD_VERSION,
-            snapshotter.VSC_CRD_PLURAL,
-            'content',
-            {})
         kubernetes.client.CustomObjectsApi.return_value.delete_namespaced_custom_object.assert_called_with(
             snapshotter.VS_CRD_GROUP,
             snapshotter.VS_CRD_VERSION,
@@ -225,7 +219,6 @@ class Snapshotter(unittest.TestCase):
 
         snapshotter.main()
 
-        kubernetes.client.CustomObjectsApi.return_value.delete_cluster_custom_object.assert_not_called()
         kubernetes.client.CustomObjectsApi.return_value.delete_namespaced_custom_object.assert_not_called()
 
 
