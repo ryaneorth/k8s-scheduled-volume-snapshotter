@@ -80,7 +80,10 @@ class Snapshotter(unittest.TestCase):
         return {
             'metadata': {
                 'creationTimestamp': (datetime.now(timezone.utc) - timedelta(minutes=created_minutes_ago)).isoformat(),
-                'name': 'some-pvc-1582056377'
+                'name': 'some-pvc-1582056377',
+                'labels': {
+                    'scheduled-volume-snapshot': 'test'
+                }
             },
             'spec': {
                 'source': {
@@ -88,6 +91,9 @@ class Snapshotter(unittest.TestCase):
                     'name': 'some-pvc'
                 },
                 'snapshotContentName': 'content'
+            },
+            'status': {
+                'readyToUse': True
             }
         }
 
@@ -152,7 +158,8 @@ class Snapshotter(unittest.TestCase):
                     'name': ANY,
                     'namespace': 'activeNamespace',
                     'labels': {
-                        'labelOne': 'someValue'
+                        'labelOne': 'someValue',
+                        'scheduled-volume-snapshot': 'test'
                     }
                 },
                 'spec': {
@@ -185,7 +192,8 @@ class Snapshotter(unittest.TestCase):
                     'name': ANY,
                     'namespace': 'activeNamespace',
                     'labels': {
-                        'labelOne': 'someValue'
+                        'labelOne': 'someValue',
+                        'scheduled-volume-snapshot': 'test'
                     }
                 },
                 'spec': {

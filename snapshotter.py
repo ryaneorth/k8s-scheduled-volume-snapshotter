@@ -23,28 +23,24 @@ v1 = kubernetes.client.CoreV1Api()
 custom_api = kubernetes.client.CustomObjectsApi()
 
 
-def get_existing_snapshots(scheduled_snapshot):
+def get_associated_snapshots(scheduled_snapshot, volume_snapshots):
+    scheduled_snapshot_name = scheduled_snapshot.get('metadata', {}).get('name')
     scheduled_snapshot_pvc = scheduled_snapshot.get('spec', {}).get('persistentVolumeClaimName')
-    try:
-        all_volume_snapshots = custom_api.list_namespaced_custom_object(
-            VS_CRD_GROUP,
-            VS_CRD_VERSION,
-            scheduled_snapshot.get('metadata', {}).get('namespace'),
-            VS_CRD_PLURAL).get('items', [])
-    except kubernetes.client.rest.ApiException:
-        all_volume_snapshots = []
-        logging.exception('Unable to fetch existing volume snapshots')
     if VS_CRD_VERSION == 'v1alpha1':
         filtered_snapshots = list(filter(
             lambda s: (
                 s.get('spec', {}).get('source', {}).get('name') == scheduled_snapshot_pvc
                 and s.get('spec', {}).get('source', {}).get('kind') == 'PersistentVolumeClaim'
-            ), all_volume_snapshots
+                and s.get('metadata', {}).get('labels', {}).get('scheduled-volume-snapshot') == scheduled_snapshot_name
+            ), volume_snapshots
         ))
     else:
-        filtered_snapshots = list(filter(lambda s: s.get('spec', {}).get('source', {}).get(
-            'persistentVolumeClaimName') == scheduled_snapshot_pvc, all_volume_snapshots))
-
+        filtered_snapshots = list(filter(
+            lambda s: (
+                s.get('spec', {}).get('source', {}).get('persistentVolumeClaimName') == scheduled_snapshot_pvc
+                and s.get('metadata', {}).get('labels', {}).get('scheduled-volume-snapshot') == scheduled_snapshot_name
+            ), volume_snapshots
+        ))
     filtered_snapshots.sort(key=lambda s: dateutil.parser.parse(
         s.get('metadata', {}).get('creationTimestamp')))
     return filtered_snapshots
@@ -52,15 +48,23 @@ def get_existing_snapshots(scheduled_snapshot):
 
 def new_snapshot_needed(scheduled_snapshot, existing_snapshots):
     try:
+        successful_snapshots = list(filter(
+            lambda s: (
+                s.get('status', {}).get('readyToUse', False)
+                or not s.get('status', {}).get('error', {})
+            ), existing_snapshots
+        ))
         raw_snapshot_frequency = scheduled_snapshot.get('spec', {}).get('snapshotFrequency')
         if isinstance(raw_snapshot_frequency, int):
             raw_snapshot_frequency = f'{str(raw_snapshot_frequency)}h'
         snapshot_frequency_in_seconds = int(humanfriendly.parse_timespan(raw_snapshot_frequency))
         time_delta = timedelta(seconds=snapshot_frequency_in_seconds)
         snapshot_needed = (
-            len(existing_snapshots) == 0
+            len(successful_snapshots) == 0
             or datetime.now(timezone.utc)
-            >= dateutil.parser.parse(existing_snapshots[-1].get('metadata', {}).get('creationTimestamp')) + time_delta)
+            >= (dateutil.parser.parse(successful_snapshots[-1].get('metadata', {}).get('creationTimestamp'))
+                + time_delta)
+        )
     except humanfriendly.InvalidTimespan:
         logging.exception(f"Unable to parse snapshotFrequency for {scheduled_snapshot.get('metadata', {}).get('name')}")
         snapshot_needed = False
@@ -71,7 +75,10 @@ def create_new_snapshot(scheduled_snapshot):
     pvc_name = scheduled_snapshot.get('spec', {}).get('persistentVolumeClaimName')
     new_snapshot_name = f'{pvc_name}-{str(int(time.time()))}'
     new_snapshot_namespace = scheduled_snapshot.get('metadata', {}).get('namespace')
-    new_snapshot_labels = scheduled_snapshot.get('spec', {}).get('snapshotLabels', {})
+    new_snapshot_labels = {
+        **scheduled_snapshot.get('spec', {}).get('snapshotLabels', {}),
+        'scheduled-volume-snapshot': scheduled_snapshot.get('metadata', {}).get('name')
+    }
     logging.info(f'Creating snapshot {new_snapshot_name} in namespace {new_snapshot_namespace}')
     volume_snapshot_body = {
         'apiVersion': f'{VS_CRD_GROUP}/{VS_CRD_VERSION}',
@@ -147,8 +154,13 @@ def main():
                 SVS_CRD_VERSION,
                 namespace.metadata.name,
                 SVS_CRD_PLURAL).get('items', [])
+            volume_snapshots = custom_api.list_namespaced_custom_object(
+                VS_CRD_GROUP,
+                VS_CRD_VERSION,
+                namespace.metadata.name,
+                VS_CRD_PLURAL).get('items', [])
             for scheduled_snapshot in scheduled_snapshots:
-                existing_snapshots = get_existing_snapshots(scheduled_snapshot)
+                existing_snapshots = get_associated_snapshots(scheduled_snapshot, volume_snapshots)
                 if new_snapshot_needed(scheduled_snapshot, existing_snapshots):
                     create_new_snapshot(scheduled_snapshot)
                 cleanup_old_snapshots(scheduled_snapshot, existing_snapshots)
