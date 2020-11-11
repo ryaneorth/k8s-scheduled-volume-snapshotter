@@ -3,19 +3,22 @@ import dateutil.parser
 import humanfriendly
 import kubernetes
 import logging
+import re
 import time
 import os
 
 logging.basicConfig(level=os.getenv('LOG_LEVEL', 'INFO'))
 kubernetes.config.load_incluster_config()
 K8S_VERSION_INFO = kubernetes.client.VersionApi().get_code()
+# strip off any trailing non-numeric characters
+K8S_MAJOR_VERSION = int(re.split('[^0-9]', K8S_VERSION_INFO.major)[0])
+K8S_MINOR_VERSION = int(re.split('[^0-9]', K8S_VERSION_INFO.minor)[0])
 
 SVS_CRD_GROUP = 'k8s.ryanorth.io'
 SVS_CRD_VERSION = 'v1beta1'
 SVS_CRD_PLURAL = 'scheduledvolumesnapshots'
 VS_CRD_GROUP = 'snapshot.storage.k8s.io'
-VS_CRD_VERSION = 'v1alpha1' if int(K8S_VERSION_INFO.major) == 1 and int(
-    K8S_VERSION_INFO.minor) < 17 else 'v1beta1'
+VS_CRD_VERSION = 'v1alpha1' if K8S_MAJOR_VERSION == 1 and K8S_MINOR_VERSION < 17 else 'v1beta1'
 VS_CRD_PLURAL = 'volumesnapshots'
 VS_CRD_KIND = 'VolumeSnapshot'
 
