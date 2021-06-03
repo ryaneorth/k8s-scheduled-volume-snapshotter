@@ -6,6 +6,8 @@ metadata:
     {{- include "scheduled-snapshot-operator.labels" . | nindent 4 }}
 spec:
   schedule: "{{ .Values.schedule }}"
+  successfulJobsHistoryLimit: {{ .Values.successfulJobsHistoryLimit }}
+  failedJobsHistoryLimit: {{ .Values.failedJobsHistoryLimit }}
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
@@ -21,5 +23,4 @@ spec:
               env:
                 - name: LOG_LEVEL
                   value: "{{ .Values.logLevel }}"
-
           restartPolicy: Never

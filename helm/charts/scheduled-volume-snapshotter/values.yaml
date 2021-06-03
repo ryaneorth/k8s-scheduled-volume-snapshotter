@@ -6,6 +6,9 @@ nameOverride: ""
 
 schedule: "*/15 * * * *"
 
+successfulJobsHistoryLimit: 3
+failedJobsHistoryLimit: 1
+
 rbac:
   enabled: true
 
