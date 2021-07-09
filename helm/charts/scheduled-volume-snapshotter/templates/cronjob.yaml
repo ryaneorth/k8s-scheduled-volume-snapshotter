@@ -12,6 +12,9 @@ spec:
   jobTemplate:
     spec:
       template:
+        metadata:
+          annotations:
+{{ toYaml .Values.podAnnotations | indent 12 }}
         spec:
           serviceAccountName: {{ include "scheduled-snapshot-operator.name" . }}
           containers:
