@@ -16,7 +16,7 @@ spec:
           serviceAccountName: {{ include "scheduled-snapshot-operator.name" . }}
           containers:
             - name: {{ .Chart.Name }}
-              image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
               imagePullPolicy: {{ .Values.image.pullPolicy }}
               resources:
 {{ toYaml .Values.resources | indent 16 }}

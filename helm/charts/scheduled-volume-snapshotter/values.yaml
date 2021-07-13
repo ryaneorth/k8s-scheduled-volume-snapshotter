@@ -1,5 +1,6 @@
 image:
   repository: ryaneorth/scheduled-volume-snapshotter
+  #tag: latest
   pullPolicy: IfNotPresent
 
 nameOverride: ""
