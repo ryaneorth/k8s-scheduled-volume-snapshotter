@@ -3,7 +3,7 @@
 # Kubernetes Scheduled Volume Snapshotter
 
 ## Overview
-The goal of this repository is to build upon the [Kubernetes CSI's](https://kubernetes-csi.github.io/docs/introduction.html) `VolumeSnapshot` custom resource by allowing users to automatically snapshot their persistent volumes on a schedule they define. The funtionality provided by this tool is something the [Kubernetes Storage Special Interest Group](https://github.com/kubernetes/community/tree/master/sig-storage) has on their [roadmap](https://github.com/kubernetes-incubator/external-storage/blob/master/snapshot/doc/volume-snapshotting-proposal.md#future-features), but has yet to be implemented.
+This repository builds upon the [Kubernetes CSI's](https://kubernetes-csi.github.io/docs/introduction.html) `VolumeSnapshot` custom resource by allowing users to automatically snapshot their persistent volumes on a schedule they define. The functionality provided by this tool is something the [Kubernetes Storage Special Interest Group](https://github.com/kubernetes/community/tree/master/sig-storage) has on their [roadmap](https://github.com/kubernetes-incubator/external-storage/blob/master/snapshot/doc/volume-snapshotting-proposal.md#future-features), but has yet to be implemented.
 
 ## Prerequisites
 You will need to have the `VolumeSnapshot` custom resource definition installed along with one or more [CSI drivers](https://kubernetes-csi.github.io/docs/drivers.html). For more information about VolumeSnapshots in Kubernetes and the Kubernetes Container Storage Interface, see [here](https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/).
