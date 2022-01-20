@@ -197,7 +197,7 @@ class Snapshotter(unittest.TestCase):
                     }
                 },
                 'spec': {
-                    'snapshotClassName': 'ebs',
+                    'volumeSnapshotClassName': 'ebs',
                     'source': {
                         'persistentVolumeClaimName': 'some-pvc'
                     }

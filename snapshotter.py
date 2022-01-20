@@ -91,9 +91,7 @@ def create_new_snapshot(scheduled_snapshot):
             'namespace': new_snapshot_namespace,
             'labels': new_snapshot_labels
         },
-        'spec': {
-            'snapshotClassName': scheduled_snapshot.get('spec', {}).get('snapshotClassName'),
-        }
+        'spec': {}
     }
     if VS_CRD_VERSION == 'v1alpha1':
         volume_snapshot_body['spec']['source'] = {
@@ -101,10 +99,13 @@ def create_new_snapshot(scheduled_snapshot):
             'kind': 'PersistentVolumeClaim',
             'name': pvc_name
         }
+        volume_snapshot_body['spec']['snapshotClassName'] = scheduled_snapshot.get('spec', {}).get('snapshotClassName')
     else:
         volume_snapshot_body['spec']['source'] = {
             'persistentVolumeClaimName': pvc_name
         }
+        volume_snapshot_body['spec']['volumeSnapshotClassName'] = scheduled_snapshot.get(
+            'spec', {}).get('snapshotClassName')
     try:
         custom_api.create_namespaced_custom_object(
             VS_CRD_GROUP,
