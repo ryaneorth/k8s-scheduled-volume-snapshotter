@@ -1,4 +1,5 @@
-# Helm Chart
+# scheduled-volume-snapshotter
+
 Using this Helm chart is the easiest way to install the scheduled volume snapshotter. To install with the base configuration, execute the following command:
 
 ```
@@ -17,4 +18,6 @@ helm upgrade --install scheduled-volume-snapshotter \
 | `failedJobsHistoryLimit`      | The number of failed jobs to retain                                                                    | `1`                                      |
 | `rbac.enabled`                | Flag indicating whether the rbac resources should be installed                                         | `true`                                   |
 | `logLevel`                    | The Python log level for the jobs                                                                      | `INFO`                                   |
-| `podAnnotations`              | Annotations to be added to pods	                                                                     | `{}`                                     |
+| `podAnnotations`              | Annotations to be added to pods                                                                        | `{}`                                     |
+| `snapshotClasses`             | Optional list of VolumeSnapshotClass resources                                                         | `[]`                                     |
+| `snapshots`                   | Optional list of ScheduledVolumeSnapshot resources                                                     | `[]`                                     |
