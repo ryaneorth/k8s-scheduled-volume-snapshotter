@@ -26,3 +26,25 @@ resources:
 podAnnotations: {}
   #key: "value"
 
+snapshotClasses: []
+  # List of VolumeSnapshotClass
+  #- metadata:
+  #    name: my-snapshotclass
+  #  parameters:
+  #    storage-locations: us-east2
+  #  driver: pd.csi.storage.gke.io
+  #  deletionPolicy: Delete
+
+snapshots: []
+  # List of ScheduledVolumeSnapshot
+  #- metadata:
+  #    name: my-snapshot
+  #    namespace: my-namespace
+  #  spec:
+  #    snapshotClassName: my-snapshotclass
+  #    persistentVolumeClaimName: my-pvc
+  #    snapshotFrequency: 1d
+  #    snapshotRetention: 365d
+  #    snapshotLabels:
+  #      firstLabel: someLabelValue
+  #      secondLabel: anotherLabelValue

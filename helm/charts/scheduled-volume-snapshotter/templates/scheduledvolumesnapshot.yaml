@@ -1,0 +1,9 @@
+{{ range .Values.snapshots -}}
+---
+apiVersion: k8s.ryanorth.io/v1beta1
+kind: ScheduledVolumeSnapshot
+metadata:
+  {{- toYaml .metadata | nindent 2 }}
+spec:
+  {{- toYaml .spec | nindent 2 }}
+{{ end -}}
