@@ -4,7 +4,6 @@ metadata:
   name: scheduledvolumesnapshots.k8s.ryanorth.io
 spec:
   group: k8s.ryanorth.io
-  version: v1beta1
   versions:
     - name: v1beta1
       served: true
