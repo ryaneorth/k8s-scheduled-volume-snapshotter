@@ -34,9 +34,11 @@ TERMINATING_NAMESPACE = kubernetes.client.V1Namespace(
 NAMESPACES = kubernetes.client.V1NamespaceList(items=[ACTIVE_NAMESPACE, TERMINATING_NAMESPACE])
 kubernetes.client.CoreV1Api.return_value.list_namespace = Mock(return_value=NAMESPACES)
 
+
 class StringStartsWith(str):
     def __eq__(self, other):
         return other is not None and other.startswith(self)
+
 
 class Snapshotter(unittest.TestCase):
     def setUp(self):
