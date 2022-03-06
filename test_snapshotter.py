@@ -160,7 +160,7 @@ class Snapshotter(unittest.TestCase):
                 'apiVersion': 'snapshot.storage.k8s.io/v1alpha1',
                 'kind': 'VolumeSnapshot',
                 'metadata': {
-                    'name': StringStartsWith('test-some-pvc-'),
+                    'name': StringStartsWith('test-'),
                     'namespace': 'activeNamespace',
                     'labels': {
                         'labelOne': 'someValue',
@@ -194,7 +194,7 @@ class Snapshotter(unittest.TestCase):
                 'apiVersion': 'snapshot.storage.k8s.io/v1beta1',
                 'kind': 'VolumeSnapshot',
                 'metadata': {
-                    'name': StringStartsWith('test-some-pvc-'),
+                    'name': StringStartsWith('test-'),
                     'namespace': 'activeNamespace',
                     'labels': {
                         'labelOne': 'someValue',
