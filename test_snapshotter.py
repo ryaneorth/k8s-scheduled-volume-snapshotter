@@ -34,6 +34,9 @@ TERMINATING_NAMESPACE = kubernetes.client.V1Namespace(
 NAMESPACES = kubernetes.client.V1NamespaceList(items=[ACTIVE_NAMESPACE, TERMINATING_NAMESPACE])
 kubernetes.client.CoreV1Api.return_value.list_namespace = Mock(return_value=NAMESPACES)
 
+class StringStartsWith(str):
+    def __eq__(self, other):
+        return other is not None and other.startswith(self)
 
 class Snapshotter(unittest.TestCase):
     def setUp(self):
@@ -155,7 +158,7 @@ class Snapshotter(unittest.TestCase):
                 'apiVersion': 'snapshot.storage.k8s.io/v1alpha1',
                 'kind': 'VolumeSnapshot',
                 'metadata': {
-                    'name': ANY,
+                    'name': StringStartsWith('test-some-pvc-'),
                     'namespace': 'activeNamespace',
                     'labels': {
                         'labelOne': 'someValue',
@@ -189,7 +192,7 @@ class Snapshotter(unittest.TestCase):
                 'apiVersion': 'snapshot.storage.k8s.io/v1beta1',
                 'kind': 'VolumeSnapshot',
                 'metadata': {
-                    'name': ANY,
+                    'name': StringStartsWith('test-some-pvc-'),
                     'namespace': 'activeNamespace',
                     'labels': {
                         'labelOne': 'someValue',
