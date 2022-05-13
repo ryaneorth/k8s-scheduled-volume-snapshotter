@@ -4,7 +4,7 @@ Using this Helm chart is the easiest way to install the scheduled volume snapsho
 
 ```
 helm upgrade --install scheduled-volume-snapshotter \
-	https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.10.0/helm-chart.tgz
+	https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.10.1/helm-chart.tgz
 ```
 
 
@@ -21,3 +21,6 @@ helm upgrade --install scheduled-volume-snapshotter \
 | `podAnnotations`              | Annotations to be added to pods                                                                        | `{}`                                     |
 | `snapshotClasses`             | Optional list of VolumeSnapshotClass resources                                                         | `[]`                                     |
 | `snapshots`                   | Optional list of ScheduledVolumeSnapshot resources                                                     | `[]`                                     |
+| `podSecurityConext`           | The securityContext to apply to the Cronjob pods                                                       | `{}`                                     |
+| `containerSecurityContext`    | The securityContext to apply to the Cronjob pods' container                                            | `{}`                                     |
+| `imagePullSecrets`            | The imagePullSecrets to apply to the Cronjob pods                                                      | `[]`                                     |
