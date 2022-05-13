@@ -1,6 +1,9 @@
 image:
   repository: ryaneorth/scheduled-volume-snapshotter
   #tag: latest
+  # List of secrets used to authorize against the remote repo
+  # - name: docker-auth-secret
+  imagePullSecrets: []
   pullPolicy: IfNotPresent
 
 nameOverride: ""
@@ -25,6 +28,14 @@ resources:
 
 podAnnotations: {}
   #key: "value"
+
+# Pod level security context
+# https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+podSecurityConext: {}
+
+# Container level security context
+# https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
+containerSecurityContext: {}
 
 snapshotClasses: []
   # List of VolumeSnapshotClass
