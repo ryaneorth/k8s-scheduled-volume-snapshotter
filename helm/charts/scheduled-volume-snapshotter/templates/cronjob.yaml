@@ -16,9 +16,9 @@ spec:
   jobTemplate:
     spec:
       template:
-        {{- if .Values.podSecurityConext }}
+        {{- if .Values.podSecurityContext }}
         securityContext:
-{{ toYaml .Values.podSecurityConext | indent 10 }}
+{{ toYaml .Values.podSecurityContext | indent 10 }}
         {{- end }}
         metadata:
           annotations:
