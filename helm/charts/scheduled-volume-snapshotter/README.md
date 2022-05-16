@@ -21,6 +21,6 @@ helm upgrade --install scheduled-volume-snapshotter \
 | `podAnnotations`              | Annotations to be added to pods                                                                        | `{}`                                     |
 | `snapshotClasses`             | Optional list of VolumeSnapshotClass resources                                                         | `[]`                                     |
 | `snapshots`                   | Optional list of ScheduledVolumeSnapshot resources                                                     | `[]`                                     |
-| `podSecurityConext`           | The securityContext to apply to the Cronjob pods                                                       | `{}`                                     |
+| `podSecurityContext`           | The securityContext to apply to the Cronjob pods                                                       | `{}`                                     |
 | `containerSecurityContext`    | The securityContext to apply to the Cronjob pods' container                                            | `{}`                                     |
 | `imagePullSecrets`            | The imagePullSecrets to apply to the Cronjob pods                                                      | `[]`                                     |
