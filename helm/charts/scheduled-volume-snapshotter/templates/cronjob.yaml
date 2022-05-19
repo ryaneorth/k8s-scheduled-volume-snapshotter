@@ -25,14 +25,14 @@ spec:
             {{- toYaml .Values.podSecurityConext | nindent 12 }}
           {{- end }}
           serviceAccountName: {{ include "scheduled-snapshot-operator.name" . }}
+          {{- if .Values.image.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml .Values.image.imagePullSecrets | nindent 12 }}
+          {{- end }}
           containers:
             - name: {{ .Chart.Name }}
               image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
               imagePullPolicy: {{ .Values.image.pullPolicy }}
-              {{- if .Values.image.imagePullSecrets }}
-              imagePullSecrets:
-                {{- toYaml .Values.image.imagePullSecrets | nindent 16 }}
-              {{- end }}
               resources:
                 {{- toYaml .Values.resources | nindent 16 }}
               {{- if .Values.containerSecurityContext }}
