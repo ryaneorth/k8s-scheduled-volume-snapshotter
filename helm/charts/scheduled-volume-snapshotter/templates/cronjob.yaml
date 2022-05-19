@@ -16,28 +16,28 @@ spec:
   jobTemplate:
     spec:
       template:
-        {{- if .Values.podSecurityContext }}
-        securityContext:
-{{ toYaml .Values.podSecurityContext | indent 10 }}
-        {{- end }}
         metadata:
           annotations:
-{{ toYaml .Values.podAnnotations | indent 12 }}
+            {{- toYaml .Values.podAnnotations | nindent 12 }}
         spec:
+          {{- if .Values.podSecurityConext }}
+          securityContext:
+            {{- toYaml .Values.podSecurityConext | nindent 12 }}
+          {{- end }}
           serviceAccountName: {{ include "scheduled-snapshot-operator.name" . }}
           {{- if .Values.image.imagePullSecrets }}
           imagePullSecrets:
-{{ toYaml .Values.image.imagePullSecrets | indent 12 }}
+            {{- toYaml .Values.image.imagePullSecrets | nindent 12 }}
           {{- end }}
           containers:
             - name: {{ .Chart.Name }}
               image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
               imagePullPolicy: {{ .Values.image.pullPolicy }}
               resources:
-{{ toYaml .Values.resources | indent 16 }}
+                {{- toYaml .Values.resources | nindent 16 }}
               {{- if .Values.containerSecurityContext }}
               securityContext:
-{{ toYaml .Values.containerSecurityContext | indent 16 }}
+                {{- toYaml .Values.containerSecurityContext | nindent 16 }}
               {{- end }}
               env:
                 - name: LOG_LEVEL
