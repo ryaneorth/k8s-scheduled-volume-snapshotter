@@ -3,7 +3,8 @@ image:
   #tag: latest
   # List of secrets used to authorize against the remote repo
   # - name: docker-auth-secret
-  imagePullSecrets: []
+  imagePullSecrets:
+    - name: adobe-artifactory-cred
   pullPolicy: IfNotPresent
 
 nameOverride: ""

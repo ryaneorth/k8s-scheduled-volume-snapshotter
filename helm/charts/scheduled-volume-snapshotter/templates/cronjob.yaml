@@ -18,11 +18,11 @@ spec:
       template:
         metadata:
           annotations:
-            {{- toYaml .Values.podAnnotations | indent 12 }}
+            {{- toYaml .Values.podAnnotations | nindent 12 }}
         spec:
           {{- if .Values.podSecurityConext }}
           securityContext:
-            {{- toYaml .Values.podSecurityConext | indent 12 }}
+            {{- toYaml .Values.podSecurityConext | nindent 12 }}
           {{- end }}
           serviceAccountName: {{ include "scheduled-snapshot-operator.name" . }}
           containers:
@@ -31,13 +31,13 @@ spec:
               imagePullPolicy: {{ .Values.image.pullPolicy }}
               {{- if .Values.image.imagePullSecrets }}
               imagePullSecrets:
-                {{- toYaml .Values.image.imagePullSecrets | indent 16 }}
+                {{- toYaml .Values.image.imagePullSecrets | nindent 16 }}
               {{- end }}
               resources:
-                {{- toYaml .Values.resources | indent 16 }}
+                {{- toYaml .Values.resources | nindent 16 }}
               {{- if .Values.containerSecurityContext }}
               securityContext:
-                {{- toYaml .Values.containerSecurityContext | indent 16 }}
+                {{- toYaml .Values.containerSecurityContext | nindent 16 }}
               {{- end }}
               env:
                 - name: LOG_LEVEL
