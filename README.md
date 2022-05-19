@@ -15,7 +15,7 @@ The easiest way to deploy this operator is using the provided [Helm chart](./hel
 
 ```
 helm upgrade --install scheduled-volume-snapshotter \
-	https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.10.2/helm-chart.tgz
+	https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.10.3/helm-chart.tgz
 ```
 
 ## Scheduling snapshots
