@@ -4,7 +4,7 @@ Using this Helm chart is the easiest way to install the scheduled volume snapsho
 
 ```
 helm upgrade --install scheduled-volume-snapshotter \
-	https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.10.3/helm-chart.tgz
+	https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.10.4/helm-chart.tgz
 ```
 
 
