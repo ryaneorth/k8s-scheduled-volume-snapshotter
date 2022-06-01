@@ -144,8 +144,7 @@ def cleanup_old_snapshots(scheduled_snapshot, existing_snapshots):
                         VS_CRD_VERSION,
                         snapshot_namespace,
                         VS_CRD_PLURAL,
-                        snapshot_name,
-                        {})
+                        snapshot_name)
                 except kubernetes.client.rest.ApiException:
                     logging.exception(
                         f'Unable to delete volume snapshot {snapshot_name} in namespace {snapshot_namespace}')

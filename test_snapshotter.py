@@ -222,8 +222,7 @@ class Snapshotter(unittest.TestCase):
             snapshotter.VS_CRD_VERSION,
             'activeNamespace',
             snapshotter.VS_CRD_PLURAL,
-            'some-pvc-1582056377',
-            {})
+            'some-pvc-1582056377')
 
     def test_delete_fails_invalid_retention(self):
         self.set_volume_snapshot_version('v1alpha1')
