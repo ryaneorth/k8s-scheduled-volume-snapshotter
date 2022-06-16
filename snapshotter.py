@@ -18,7 +18,13 @@ SVS_CRD_GROUP = 'k8s.ryanorth.io'
 SVS_CRD_VERSION = 'v1beta1'
 SVS_CRD_PLURAL = 'scheduledvolumesnapshots'
 VS_CRD_GROUP = 'snapshot.storage.k8s.io'
-VS_CRD_VERSION = 'v1alpha1' if K8S_MAJOR_VERSION == 1 and K8S_MINOR_VERSION < 17 else 'v1beta1'
+if K8S_MAJOR_VERSION == 1 and K8S_MINOR_VERSION >= 17:
+    if K8S_MINOR_VERSION >= 20:
+        VS_CRD_VERSION = 'v1'
+    else:
+        VS_CRD_VERSION = 'v1beta1'
+else:
+    VS_CRD_VERSION = 'v1alpha1'
 VS_CRD_PLURAL = 'volumesnapshots'
 VS_CRD_KIND = 'VolumeSnapshot'
 

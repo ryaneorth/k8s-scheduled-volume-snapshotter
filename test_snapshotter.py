@@ -56,7 +56,6 @@ class Snapshotter(unittest.TestCase):
 
     def set_volume_snapshot_version(self, volume_snapshot_version):
         snapshotter.VS_CRD_VERSION = volume_snapshot_version
-        snapshotter.VSC_CRD_VERSION = volume_snapshot_version
 
     def handle_list_namespaced_custom_object(self, group, version, namespace, plural, **kwargs):
         if plural == 'scheduledvolumesnapshots':
