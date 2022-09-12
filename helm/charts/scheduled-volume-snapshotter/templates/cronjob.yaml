@@ -19,10 +19,14 @@ spec:
         metadata:
           annotations:
             {{- toYaml .Values.podAnnotations | nindent 12 }}
+          {{- if .Values.podLabels }}
+          labels:
+            {{- toYaml .Values.podLabels | nindent 12 }}
+          {{- end }}
         spec:
-          {{- if .Values.podSecurityConext }}
+          {{- if .Values.podSecurityContext }}
           securityContext:
-            {{- toYaml .Values.podSecurityConext | nindent 12 }}
+            {{- toYaml .Values.podSecurityContext | nindent 12 }}
           {{- end }}
           serviceAccountName: {{ include "scheduled-snapshot-operator.name" . }}
           {{- if .Values.image.imagePullSecrets }}

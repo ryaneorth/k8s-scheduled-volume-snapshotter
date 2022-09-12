@@ -29,6 +29,10 @@ resources:
 podAnnotations: {}
   #key: "value"
 
+# Additional labels to add to the pod
+podLabels: {}
+  #key: "value"
+
 # Pod level security context
 # https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
 podSecurityContext: {}
