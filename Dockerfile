@@ -1,10 +1,12 @@
-FROM python:3.9.13-slim-bullseye
+FROM python:3.9.14-slim-bullseye
 
 WORKDIR /
 
 COPY snapshotter.py .
 
 COPY requirements.txt .
+
+RUN apt update && apt upgrade -y
 
 RUN pip install --upgrade pip==22.1.2
 
