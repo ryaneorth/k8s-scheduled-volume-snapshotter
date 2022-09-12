@@ -35,6 +35,7 @@ jobs:
           tags: localbuild/testimage:latest
           push: false
           load: true
+          no-cache: true
       - name: Download Grype
         uses: anchore/scan-action/download-grype@v3
         id: grype

@@ -6,7 +6,7 @@ COPY snapshotter.py .
 
 COPY requirements.txt .
 
-RUN apt update && apt upgrade -y
+RUN apt-get update && apt-get upgrade -y
 
 RUN pip install --upgrade pip==22.1.2
 
