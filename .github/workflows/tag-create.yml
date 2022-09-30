@@ -1,9 +1,9 @@
 name: ON_TAG_CREATE
 
 on:
-  label:
-    types:
-      - created
+  push:
+    tags:
+      - '*'
 
 jobs:
   repo:
