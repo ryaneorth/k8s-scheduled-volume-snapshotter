@@ -18,6 +18,7 @@ jobs:
           chmod 700 get_helm.sh
           ./get_helm.sh
           rm get_helm.sh
+          git fetch --tags
           ALL_TAGS=($(git tag))
           echo "apiVersion: v1" > repo/index.yaml
           mkdir tmp_git
