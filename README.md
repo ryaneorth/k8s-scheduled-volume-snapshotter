@@ -14,8 +14,8 @@ The Scheduled Volume Snapshotter works with both `v1alpha1` (Kubernetes versions
 The easiest way to deploy this operator is using the provided [Helm chart](./helm/charts/scheduled-volume-snapshotter):
 
 ```
-helm upgrade --install scheduled-volume-snapshotter \
-	https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.12.2/helm-chart.tgz
+helm repo add scheduled-volume-snapshotter https://raw.githubusercontent.com/ryaneorth/k8s-scheduled-volume-snapshotter/main/repo
+helm upgrade --install scheduled-volume-snapshotter scheduled-volume-snapshotter/scheduled-volume-snapshotter
 ```
 
 ## Scheduling snapshots
