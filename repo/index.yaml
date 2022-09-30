@@ -1,1 +1,204 @@
 apiVersion: v1
+entries:
+  scheduled-volume-snapshotter:
+  - apiVersion: v2
+    appVersion: 0.12.2
+    created: "2022-09-30T16:15:51.89076608Z"
+    description: A Helm chart for deploying the scheduled volume snapshotter
+    digest: 9dbab7556562138cdc28006d2918a8b0ac66173042d13696c796d12f14b5fc7b
+    name: scheduled-volume-snapshotter
+    type: application
+    urls:
+    - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.12.2/helm-chart.tgz
+    version: 0.12.2
+  - apiVersion: v2
+    appVersion: 0.12.1
+    created: "2022-09-30T16:15:51.781758602Z"
+    description: A Helm chart for deploying the scheduled volume snapshotter
+    digest: e4c9843aacb178d2cb5f6fa3de5bdd4e1500216d8a19e282996a404ada0dab8a
+    name: scheduled-volume-snapshotter
+    type: application
+    urls:
+    - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.12.1/helm-chart.tgz
+    version: 0.12.1
+  - apiVersion: v2
+    appVersion: 0.12.0
+    created: "2022-09-30T16:15:51.6809373Z"
+    description: A Helm chart for deploying the scheduled volume snapshotter
+    digest: 7b52137b24d4678bce12ae665688cd6b84db87d38017a587814623e8c21cb5d2
+    name: scheduled-volume-snapshotter
+    type: application
+    urls:
+    - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.12.0/helm-chart.tgz
+    version: 0.12.0
+  - apiVersion: v2
+    appVersion: 0.11.0
+    created: "2022-09-30T16:15:51.574910214Z"
+    description: A Helm chart for deploying the scheduled volume snapshotter
+    digest: fc2f1c05fdde839c4661c3f65ff503c2f2445dcdf8e74988a4790cd78fb26e70
+    name: scheduled-volume-snapshotter
+    type: application
+    urls:
+    - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.11.0/helm-chart.tgz
+    version: 0.11.0
+  - apiVersion: v2
+    appVersion: 0.10.4
+    created: "2022-09-30T16:15:51.474526111Z"
+    description: A Helm chart for deploying the scheduled volume snapshotter
+    digest: b85ad2f130f23b8a8fcf8f216b2302139e605ca7c5fe64c670333ecbab08e788
+    name: scheduled-volume-snapshotter
+    type: application
+    urls:
+    - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.10.4/helm-chart.tgz
+    version: 0.10.4
+  - apiVersion: v2
+    appVersion: 0.10.3
+    created: "2022-09-30T16:15:51.374862124Z"
+    description: A Helm chart for deploying the scheduled volume snapshotter
+    digest: e10846553a7b9f45eb04bd1947014a9bb39f56d11256328a5b17f0f2f8890611
+    name: scheduled-volume-snapshotter
+    type: application
+    urls:
+    - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.10.3/helm-chart.tgz
+    version: 0.10.3
+  - apiVersion: v2
+    appVersion: 0.10.2
+    created: "2022-09-30T16:15:51.276639555Z"
+    description: A Helm chart for deploying the scheduled volume snapshotter
+    digest: 69546e328360ee6821a8e018c61c99e765504cc0b9f81e673e9ee115745f6223
+    name: scheduled-volume-snapshotter
+    type: application
+    urls:
+    - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.10.2/helm-chart.tgz
+    version: 0.10.2
+  - apiVersion: v2
+    appVersion: 0.10.1
+    created: "2022-09-30T16:15:51.162489206Z"
+    description: A Helm chart for deploying the scheduled volume snapshotter
+    digest: abcb6aa1b88718b1c1594296cd918299c704c72983f6556bb3d421d6b9824000
+    name: scheduled-volume-snapshotter
+    type: application
+    urls:
+    - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.10.1/helm-chart.tgz
+    version: 0.10.1
+  - apiVersion: v2
+    appVersion: 0.10.0
+    created: "2022-09-30T16:15:51.036069048Z"
+    description: A Helm chart for deploying the scheduled volume snapshotter
+    digest: e48bb55c621f3e6dd28b0ddd7a019a346c8ed1358052b42f16b20dfa0eabd7df
+    name: scheduled-volume-snapshotter
+    type: application
+    urls:
+    - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.10.0/helm-chart.tgz
+    version: 0.10.0
+  - apiVersion: v2
+    appVersion: 0.9.1
+    created: "2022-09-30T16:15:53.006264481Z"
+    description: A Helm chart for deploying the scheduled volume snapshotter
+    digest: 92633913b2fa4ec054379a5625f566150e342918a71cd8786ebb350c6364fe02
+    name: scheduled-volume-snapshotter
+    type: application
+    urls:
+    - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.9.1/helm-chart.tgz
+    version: 0.9.1
+  - apiVersion: v2
+    appVersion: 0.9.0
+    created: "2022-09-30T16:15:52.901397892Z"
+    description: A Helm chart for deploying the scheduled volume snapshotter
+    digest: aa57f2abd12154403822a93d5a7fe2da62f720ec0c30c53b84305a61c4925e18
+    name: scheduled-volume-snapshotter
+    type: application
+    urls:
+    - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.9.0/helm-chart.tgz
+    version: 0.9.0
+  - apiVersion: v2
+    appVersion: 0.8.0
+    created: "2022-09-30T16:15:52.799546493Z"
+    description: A Helm chart for deploying the scheduled volume snapshotter
+    digest: b8ca1f1400b66983844a650066f04fd318c70f49098c3b6a73cef009ba60b5fa
+    name: scheduled-volume-snapshotter
+    type: application
+    urls:
+    - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.8.0/helm-chart.tgz
+    version: 0.8.0
+  - apiVersion: v2
+    appVersion: 0.7.1
+    created: "2022-09-30T16:15:52.698436592Z"
+    description: A Helm chart for deploying the scheduled volume snapshotter
+    digest: 0cb5f919f07dc4b645b55f80c1c13aa352d6529ec43d124b02f71d17097f0e2e
+    name: scheduled-volume-snapshotter
+    type: application
+    urls:
+    - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.7.1/helm-chart.tgz
+    version: 0.7.1
+  - apiVersion: v2
+    appVersion: 0.7.0
+    created: "2022-09-30T16:15:52.593960701Z"
+    description: A Helm chart for deploying the scheduled volume snapshotter
+    digest: e23e87f39641eaa4282a1cd8b025d3831b1bea71f5f1b46b581b25f37f2ceb1e
+    name: scheduled-volume-snapshotter
+    type: application
+    urls:
+    - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.7.0/helm-chart.tgz
+    version: 0.7.0
+  - apiVersion: v2
+    appVersion: 0.6.0
+    created: "2022-09-30T16:15:52.494497995Z"
+    description: A Helm chart for deploying the scheduled volume snapshotter
+    digest: 4f61c6a2af294ae97de150bfe0670f22d8ac76ef404002acf596be22a709dbe9
+    name: scheduled-volume-snapshotter
+    type: application
+    urls:
+    - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.6.0/helm-chart.tgz
+    version: 0.6.0
+  - apiVersion: v2
+    appVersion: 0.5.1
+    created: "2022-09-30T16:15:52.395557187Z"
+    description: A Helm chart for deploying the scheduled volume snapshotter
+    digest: c8c4ca1710d99eefeabc2f7c893f9778c7e1bc5dae52c63f13e55ace631617e9
+    name: scheduled-volume-snapshotter
+    type: application
+    urls:
+    - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.5.1/helm-chart.tgz
+    version: 0.5.1
+  - apiVersion: v2
+    appVersion: "0.4"
+    created: "2022-09-30T16:15:52.194212783Z"
+    description: A Helm chart for deploying the scheduled volume snapshotter
+    digest: bc12ce5ad46ddab9959610839842c7b1a90c7f98aa1a6dd8a7c714ad5b28d76a
+    name: scheduled-volume-snapshotter
+    type: application
+    urls:
+    - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.4/helm-chart.tgz
+    version: "0.4"
+  - apiVersion: v2
+    appVersion: "0.3"
+    created: "2022-09-30T16:15:52.093949979Z"
+    description: A Helm chart for deploying the scheduled volume snapshotter
+    digest: 19b8054faf28f65bd18339272cc106cb3fcc82ab0998afe9486a882073f82058
+    name: scheduled-volume-snapshotter
+    type: application
+    urls:
+    - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.3/helm-chart.tgz
+    version: "0.3"
+  - apiVersion: v2
+    appVersion: "0.2"
+    created: "2022-09-30T16:15:51.994126474Z"
+    description: A Helm chart for deploying the scheduled volume snapshotter
+    digest: 873dc3ec179dc85320001f60bebf2019ae13400bfab84191b464320dbfa94c4e
+    name: scheduled-volume-snapshotter
+    type: application
+    urls:
+    - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.2/helm-chart.tgz
+    version: "0.2"
+  - apiVersion: v2
+    appVersion: "0.1"
+    created: "2022-09-30T16:15:50.932305721Z"
+    description: A Helm chart for deploying the scheduled volume snapshotter
+    digest: d214e812a8e3b68bb686d57788243385ab56b907951d7430e2218941414572c0
+    name: scheduled-volume-snapshotter
+    type: application
+    urls:
+    - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.1/helm-chart.tgz
+    version: "0.1"
+generated: "2022-09-30T16:15:53.004987485Z"
