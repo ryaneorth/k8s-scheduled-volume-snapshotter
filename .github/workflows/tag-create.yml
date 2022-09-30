@@ -34,7 +34,7 @@ jobs:
             echo "CHART_VERSION=${CURRENT_CHART_VERSION}" >> $GITHUB_ENV
       - name: Push index.yaml
         run: |
-          git config --global user.name 'Ryan Orth'
-          git config --global user.email '${{ secrets.GITHUB_EMAIL }}'
+          git config --global user.name '${{ secrets.PRIMARY_USERNAME }}'
+          git config --global user.email '${{ secrets.PRIMARY_EMAIL }}'
           git commit -am "Update helm repo index for release ${{ env.CHART_VERSION }}"
           git push
