@@ -1,3 +1,7 @@
+# Additional labels to add to the cronjob
+cronLabels: {}
+  #key: "value"
+
 image:
   repository: ryaneorth/scheduled-volume-snapshotter
   #tag: latest
@@ -26,6 +30,7 @@ resources:
     cpu: 100m
     memory: 128Mi
 
+# Additional annotations to add to the pod
 podAnnotations: {}
   #key: "value"
 
