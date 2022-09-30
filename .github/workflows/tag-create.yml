@@ -1,0 +1,40 @@
+name: ON_TAG_CREATE
+
+on:
+  label:
+    types:
+      - created
+
+jobs:
+  repo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Generate Index
+        uses: WyriHaximus/github-action-helm3@v2.1.3
+        with:
+          exec: |
+            ALL_TAGS=($(git tag))
+            echo "apiVersion: v1" > repo/index.yaml
+            mkdir tmp_git
+            cd tmp_git
+            git clone https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter.git
+            cd k8s-scheduled-volume-snapshotter
+            for tag in "${ALL_TAGS[@]}"; do
+                git checkout "$tag"
+                CHART_VERSION=$(helm show chart helm/charts/scheduled-volume-snapshotter | grep version: | awk '{print $2}')
+                PACKAGE_LOC=$(helm package helm/charts/scheduled-volume-snapshotter --destination ../../repo | awk '{print $(NF)}')
+                mv "$PACKAGE_LOC" ../../repo/helm-chart.tgz
+                echo "Chart Version: $CHART_VERSION"
+                helm repo index ../../repo --url "https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/${tag}" --merge ../../repo/index.yaml
+                rm ../../repo/helm-chart.tgz
+            done
+            cd ../.. && rm -rf tmp_git
+            CURRENT_CHART_VERSION=$(helm show chart helm/charts/scheduled-volume-snapshotter | grep version: | awk '{print $2}')
+            echo "CHART_VERSION=${CURRENT_CHART_VERSION}" >> $GITHUB_ENV
+      - name: Push index.yaml
+        run: |
+          git config --global user.name 'Ryan Orth'
+          git config --global user.email '${{ secrets.GITHUB_EMAIL }}'
+          git commit -am "Update helm repo index for release ${{ env.CHART_VERSION }}"
+          git push
