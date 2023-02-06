@@ -8,7 +8,7 @@ This repository builds upon the [Kubernetes CSI's](https://kubernetes-csi.github
 ## Prerequisites
 You will need to have the `VolumeSnapshot` custom resource definition installed along with one or more [CSI drivers](https://kubernetes-csi.github.io/docs/drivers.html). For more information about VolumeSnapshots in Kubernetes and the Kubernetes Container Storage Interface, see [here](https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/).
 
-The Scheduled Volume Snapshotter works with both `v1alpha1` (Kubernetes versions 1.12 - 1.16) and `v1beta1` (Kubernetes versions >= 1.17) versions of the `VolumeSnapshot` custom resource.
+The Scheduled Volume Snapshotter works with `v1alpha1` (Kubernetes 1.12 - 1.16), `v1beta1` (Kubernetes 1.17 - 1.19), and `v1` (Kubernetes >= 1.20) versions of the `VolumeSnapshot` custom resource.
 
 ## Installation
 The easiest way to deploy this operator is using the provided [Helm chart](./helm/charts/scheduled-volume-snapshotter):
