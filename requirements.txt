@@ -1,2 +1,2 @@
-humanfriendly==7.1
-kubernetes==11.0.0
+humanfriendly==10.0
+kubernetes==22.6.0
