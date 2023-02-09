@@ -68,3 +68,5 @@ snapshots: []
   #    snapshotLabels:
   #      firstLabel: someLabelValue
   #      secondLabel: anotherLabelValue
+
+startingDeadlineSeconds: 300
