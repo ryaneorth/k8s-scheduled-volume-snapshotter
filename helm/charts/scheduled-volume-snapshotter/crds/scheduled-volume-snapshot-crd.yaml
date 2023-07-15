@@ -41,6 +41,22 @@ spec:
                 - persistentVolumeClaimName
                 - snapshotFrequency
                 - snapshotRetention
+      additionalPrinterColumns:
+        - name: PVC
+          type: string
+          jsonPath: .spec.persistentVolumeClaimName
+        - name: SnapshotClassName
+          type: string
+          jsonPath: .spec.snapshotClassName
+        - name: Frequency
+          type: string
+          jsonPath: .spec.snapshotFrequency
+        - name: Retention
+          type: string
+          jsonPath: .spec.snapshotRetention
+        - name: Age
+          type: date
+          jsonPath: .metadata.creationTimestamp
   scope: Namespaced
   names:
     plural: scheduledvolumesnapshots
