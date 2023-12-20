@@ -81,13 +81,16 @@ def new_snapshot_needed(scheduled_snapshot, existing_snapshots):
 
 
 def create_new_snapshot(scheduled_snapshot):
-    scheduled_snapshot_name = scheduled_snapshot.get('metadata').get('name')
+    scheduled_snapshot_name = scheduled_snapshot.get('metadata', {}).get('name')
     pvc_name = scheduled_snapshot.get('spec', {}).get('persistentVolumeClaimName')
     new_snapshot_name = f'{scheduled_snapshot_name}-{str(int(time.time()))}'
     new_snapshot_namespace = scheduled_snapshot.get('metadata', {}).get('namespace')
+    scheduled_snapshot_name_label = scheduled_snapshot_name
+    if len(scheduled_snapshot_name) > 63:
+        scheduled_snapshot_name_label = scheduled_snapshot_name[:63]
     new_snapshot_labels = {
         **scheduled_snapshot.get('spec', {}).get('snapshotLabels', {}),
-        'scheduled-volume-snapshot': scheduled_snapshot.get('metadata', {}).get('name')
+        'scheduled-volume-snapshot': scheduled_snapshot_name_label
     }
     logging.info(f'Creating snapshot {new_snapshot_name} in namespace {new_snapshot_namespace}')
     volume_snapshot_body = {
