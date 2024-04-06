@@ -13,6 +13,7 @@ K8S_VERSION_INFO = kubernetes.client.VersionApi().get_code()
 # strip off any trailing non-numeric characters
 K8S_MAJOR_VERSION = int(re.split('[^0-9]', K8S_VERSION_INFO.major)[0])
 K8S_MINOR_VERSION = int(re.split('[^0-9]', K8S_VERSION_INFO.minor)[0])
+IGNORE_UNSUCCESSFUL_SNAPSHOTS = os.getenv('IGNORE_UNSUCCESSFUL_SNAPSHOTS', 'false').lower() == 'true'
 
 SVS_CRD_GROUP = 'k8s.ryanorth.io'
 SVS_CRD_VERSION = 'v1beta1'
@@ -57,12 +58,14 @@ def get_associated_snapshots(scheduled_snapshot, volume_snapshots):
 
 def new_snapshot_needed(scheduled_snapshot, existing_snapshots):
     try:
-        successful_snapshots = list(filter(
-            lambda s: (
-                s.get('status', {}).get('readyToUse', False)
-                or not s.get('status', {}).get('error', {})
-            ), existing_snapshots
-        ))
+        successful_snapshots = existing_snapshots
+        if not IGNORE_UNSUCCESSFUL_SNAPSHOTS:
+            successful_snapshots = list(filter(
+                lambda s: (
+                    s.get('status', {}).get('readyToUse', False)
+                    or not s.get('status', {}).get('error', {})
+                ), existing_snapshots
+            ))
         raw_snapshot_frequency = scheduled_snapshot.get('spec', {}).get('snapshotFrequency')
         if isinstance(raw_snapshot_frequency, int):
             raw_snapshot_frequency = f'{str(raw_snapshot_frequency)}h'

@@ -50,4 +50,6 @@ spec:
               env:
                 - name: LOG_LEVEL
                   value: "{{ .Values.logLevel }}"
+                - name: IGNORE_UNSUCCESSFUL_SNAPSHOTS
+                  value: "{{ .Values.ignoreUnsuccessfulSnapshots }}"
           restartPolicy: Never
