@@ -2,10 +2,20 @@ apiVersion: v1
 entries:
   scheduled-volume-snapshotter:
   - apiVersion: v2
-    appVersion: 0.14.1
-    created: "2023-12-20T20:48:34.633600006Z"
+    appVersion: 0.15.0
+    created: "2024-04-08T23:23:08.428311322Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: 6a7abec9abf79979e115e524def1f53f46d7f1f7fdc7974b26329141df15b262
+    digest: 32539539977267c8b7d673f4997c4b53a00d71845751c58c988a81eb1dce7c5a
+    name: scheduled-volume-snapshotter
+    type: application
+    urls:
+    - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.15.0/helm-chart.tgz
+    version: 0.15.0
+  - apiVersion: v2
+    appVersion: 0.14.1
+    created: "2024-04-08T23:23:08.322948764Z"
+    description: A Helm chart for deploying the scheduled volume snapshotter
+    digest: 64f415b2401e5f86a5902a31587129a3fe17e338d1857f6d4010c96316c78c84
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -13,9 +23,9 @@ entries:
     version: 0.14.1
   - apiVersion: v2
     appVersion: 0.14.0
-    created: "2023-12-20T20:48:34.515626599Z"
+    created: "2024-04-08T23:23:08.214598245Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: e224e361f1d532989e7b4eb3579b70343bbbaa1d7a7b0fb095cd2765d2698a37
+    digest: 94a56576d3141564727f9d917f3d883776bab70db0d79f00c13d0b930768dac5
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -23,9 +33,9 @@ entries:
     version: 0.14.0
   - apiVersion: v2
     appVersion: 0.13.0
-    created: "2023-12-20T20:48:34.401610509Z"
+    created: "2024-04-08T23:23:08.107221049Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: e7b4a1ce487df4a694cfce7198a09ddb90dec98a15adfd4f18f224e3624bebe1
+    digest: 997aea647342a70aeedf086e1e704714e6740eba5babab4f0b4e781d528ba8d0
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -33,9 +43,9 @@ entries:
     version: 0.13.0
   - apiVersion: v2
     appVersion: 0.12.3
-    created: "2023-12-20T20:48:34.286613669Z"
+    created: "2024-04-08T23:23:07.994674685Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: 4fd8e8bacbddb8a5c524d2920358912ff268cee51c3fed09564192c080e2291b
+    digest: ccdacb4c71388758bc3c8e4b1e6fca28d8e416343b49df026c4e7c8e65e97104
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -43,9 +53,9 @@ entries:
     version: 0.12.3
   - apiVersion: v2
     appVersion: 0.12.2
-    created: "2023-12-20T20:48:34.170998413Z"
+    created: "2024-04-08T23:23:07.888831685Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: 0cf893c69d8b1d94a3998dd2ec11b12cd8e72c0014c94ac92fe547d1b41b78d5
+    digest: b9b1f18282f8c721c6110bff67cd387e51decb71ce56840ab592bd141a5299ae
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -53,9 +63,9 @@ entries:
     version: 0.12.2
   - apiVersion: v2
     appVersion: 0.12.1
-    created: "2023-12-20T20:48:34.05367694Z"
+    created: "2024-04-08T23:23:07.780355705Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: ded2ab9ab1d8092f4ec4badd8e3858d48d6f822989c5e3eabdf1a9e2ce08e5e4
+    digest: 363a09600cb89fc1f23a1a28e488dd78bc1eaa7bea9c6c762f7ae09e50f61de8
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -63,9 +73,9 @@ entries:
     version: 0.12.1
   - apiVersion: v2
     appVersion: 0.12.0
-    created: "2023-12-20T20:48:33.939115356Z"
+    created: "2024-04-08T23:23:07.673369883Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: 8723a38a5d78321e20e3ecaa969ad807fd772225e1396873624bb35204fbf2dc
+    digest: 4c2e2692b1b93886f1c30db767fb3a7bcb3ed259fbf5a8102921bf2c7f490981
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -73,9 +83,9 @@ entries:
     version: 0.12.0
   - apiVersion: v2
     appVersion: 0.11.0
-    created: "2023-12-20T20:48:33.823171416Z"
+    created: "2024-04-08T23:23:07.567020622Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: 33d9805cfc5ef915e4f4998b64acf567ffdbbd129b73d98d4a243beda0ced0ee
+    digest: 1d7362ed2b348980bd378e2434ed8cfe7e349f5545158655630e7a4d02f62759
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -83,9 +93,9 @@ entries:
     version: 0.11.0
   - apiVersion: v2
     appVersion: 0.10.4
-    created: "2023-12-20T20:48:33.708653722Z"
+    created: "2024-04-08T23:23:07.461461409Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: c37dba7c3f65002483ae2c1a783d62066f223d43856871dbc590a462727d8e3f
+    digest: b4a32b88f8d7132ddd513b187164e1692547d0f10d608f1690153d38d801b541
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -93,9 +103,9 @@ entries:
     version: 0.10.4
   - apiVersion: v2
     appVersion: 0.10.3
-    created: "2023-12-20T20:48:33.588900033Z"
+    created: "2024-04-08T23:23:07.351284436Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: 320e6eb0bec7d9fb36233974f9a731dfeb82232392567e2e6eee8d80596fed72
+    digest: 20565984fc49456a6957a117e13a2ea88085e99dba661bc3993d561e8174a1ca
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -103,9 +113,9 @@ entries:
     version: 0.10.3
   - apiVersion: v2
     appVersion: 0.10.2
-    created: "2023-12-20T20:48:33.476411644Z"
+    created: "2024-04-08T23:23:07.241723598Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: 1123e557661f3becabf57a8023eb7d1401185a9b1a11d5addcc72305d9af266a
+    digest: 84eb38682fe51794fabde43abc70785f66fb25c6f05a85aacc45d0239d682051
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -113,9 +123,9 @@ entries:
     version: 0.10.2
   - apiVersion: v2
     appVersion: 0.10.1
-    created: "2023-12-20T20:48:33.360988382Z"
+    created: "2024-04-08T23:23:07.136100326Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: 9b450ad1ae6690a17f668d4309a9c137d455e0a3ff4dcc0f2cab42ab73a13fe2
+    digest: 93b7dffab1118f4eaad126d7b52f4c013277403e8a282413818c733777965885
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -123,9 +133,9 @@ entries:
     version: 0.10.1
   - apiVersion: v2
     appVersion: 0.10.0
-    created: "2023-12-20T20:48:33.246407599Z"
+    created: "2024-04-08T23:23:07.027467496Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: a235fc8043d5ac4a09d648dbc8d9bb2a6276b55aaa63acde04553e04f53d09e3
+    digest: f6289d582d3dec0100ffa2322429f7471295f720511cb29f285ee19dab9d58c5
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -133,9 +143,9 @@ entries:
     version: 0.10.0
   - apiVersion: v2
     appVersion: 0.9.1
-    created: "2023-12-20T20:48:35.926568165Z"
+    created: "2024-04-08T23:23:09.63552344Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: 99953249852067e6b19114c6fe3a10ce4134a3d521d0007e59a88e30c61549eb
+    digest: cd9d5ac716248fdae6e8e6097ac51d13b798a37a3bf2e9edbb7ae898a3737ece
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -143,9 +153,9 @@ entries:
     version: 0.9.1
   - apiVersion: v2
     appVersion: 0.9.0
-    created: "2023-12-20T20:48:35.809635003Z"
+    created: "2024-04-08T23:23:09.526690034Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: 2fac0b611e70850c8585a68fab720766c5057d1fd3051d8dbcacc520d95c3abf
+    digest: 7bd6ed5987247ae3ec6c451867f3fa6104c0cab25ad2fdc44f2e2119d5b9e46d
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -153,9 +163,9 @@ entries:
     version: 0.9.0
   - apiVersion: v2
     appVersion: 0.8.0
-    created: "2023-12-20T20:48:35.692223084Z"
+    created: "2024-04-08T23:23:09.416560085Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: 41a4a69f40b8a160d42a35cf6b8d7107ed4e72091326872df7b6ce4e73bf7342
+    digest: 509f0d93eaba488d2dd5153f2e053c455ef5a757451584353595cf9f1fb98e6f
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -163,9 +173,9 @@ entries:
     version: 0.8.0
   - apiVersion: v2
     appVersion: 0.7.1
-    created: "2023-12-20T20:48:35.574932653Z"
+    created: "2024-04-08T23:23:09.308802395Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: f36e2beb225387073b17c59d271894bce49b464d7139bd2b8e74d5eb4a9509bc
+    digest: 894d2e8ddd18b39f15e7c9b29b18da43d97996196a8f73918e329a32e93601e0
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -173,9 +183,9 @@ entries:
     version: 0.7.1
   - apiVersion: v2
     appVersion: 0.7.0
-    created: "2023-12-20T20:48:35.460643191Z"
+    created: "2024-04-08T23:23:09.198574858Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: cab1fa1598e6227ca97b2b68299043e761890d412021a718ec033b9db274464d
+    digest: 129446d7732ad28ed17615a31b6a53a406449d0aeae53fbdf11f45521794f146
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -183,9 +193,9 @@ entries:
     version: 0.7.0
   - apiVersion: v2
     appVersion: 0.6.0
-    created: "2023-12-20T20:48:35.343424787Z"
+    created: "2024-04-08T23:23:09.076712005Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: fcf066002902e631013ac1b4643b9643ccb311d10f3aaea6c87e14f2442ea199
+    digest: 339cc502fc882e4d8522d7980239be9c9d4c97ffed80319920e2ac67faff44d6
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -193,9 +203,9 @@ entries:
     version: 0.6.0
   - apiVersion: v2
     appVersion: 0.5.1
-    created: "2023-12-20T20:48:35.220606148Z"
+    created: "2024-04-08T23:23:08.967655701Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: f62f821272782fef870172a02a8f9482e351cef43ff0f11cb442e3a42592d493
+    digest: 682c892becb0f977b9acdb4883dd82d11cc3add77cd7d6e880fa35e43f3c1f40
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -203,9 +213,9 @@ entries:
     version: 0.5.1
   - apiVersion: v2
     appVersion: "0.4"
-    created: "2023-12-20T20:48:34.986141881Z"
+    created: "2024-04-08T23:23:08.751460475Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: 170783c91e39e6a15ce69dd20530f47d57b05c73c2c914620de78ab449be41fa
+    digest: bb806fea458290f587f7425f8c622d5594cbba0c0bf351fdbf24fa93cf370ed5
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -213,9 +223,9 @@ entries:
     version: "0.4"
   - apiVersion: v2
     appVersion: "0.3"
-    created: "2023-12-20T20:48:34.869526945Z"
+    created: "2024-04-08T23:23:08.642315568Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: 13c329e0e6c78417d88ec96ea75a6ae53b7424ce70ce9aeaf8d6383ee125012c
+    digest: 44a38c000ecbbcc1e16e38dc00a06a71639e3e604258c845cf282ae2231cfbdb
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -223,9 +233,9 @@ entries:
     version: "0.3"
   - apiVersion: v2
     appVersion: "0.2"
-    created: "2023-12-20T20:48:34.754514786Z"
+    created: "2024-04-08T23:23:08.535605827Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: 0e76fc29e01f2e79d6e4bb6915e660b503dcf22717da8e4c315ce8d8a8085642
+    digest: a13ca906dd0303ca10c3343520235ff465a39ed428e547cde60886b1deb6a5f7
     name: scheduled-volume-snapshotter
     type: application
     urls:
@@ -233,12 +243,12 @@ entries:
     version: "0.2"
   - apiVersion: v2
     appVersion: "0.1"
-    created: "2023-12-20T20:48:33.129151964Z"
+    created: "2024-04-08T23:23:06.876352094Z"
     description: A Helm chart for deploying the scheduled volume snapshotter
-    digest: 870491dc8d3c03517e09e3cc4cd87a8f4093f9a009f1acb06cae4cf36af1c000
+    digest: ecf54f7e1bcf5dbd5bf10b568cdca136720a609aa16d54b91b390f6f93bbf358
     name: scheduled-volume-snapshotter
     type: application
     urls:
     - https://github.com/ryaneorth/k8s-scheduled-volume-snapshotter/releases/download/v0.1/helm-chart.tgz
     version: "0.1"
-generated: "2023-12-20T20:48:35.926053113Z"
+generated: "2024-04-08T23:23:09.635098196Z"
