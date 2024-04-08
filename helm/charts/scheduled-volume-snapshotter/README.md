@@ -19,6 +19,7 @@ helm upgrade --install scheduled-volume-snapshotter scheduled-volume-snapshotter
 | `failedJobsHistoryLimit`      | The number of failed jobs to retain                                                                    | `1`                                      |
 | `rbac.enabled`                | Flag indicating whether the rbac resources should be installed                                         | `true`                                   |
 | `logLevel`                    | The Python log level for the jobs                                                                      | `INFO`                                   |
+| `ignoreUnsuccessfulSnapshots` | Flag indicating if previously generated snapshots in a non-successful state should be considered when determining if a new snapshot needs to be generated                                                                      | `false`                                   |
 | `podLabels`                   | Additional labels to add to the CronJob pods                                                           | `{}`                                     |
 | `podAnnotations`              | Annotations to be added to pods                                                                        | `{}`                                     |
 | `snapshotClasses`             | Optional list of VolumeSnapshotClass resources                                                         | `[]`                                     |

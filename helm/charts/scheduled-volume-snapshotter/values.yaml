@@ -22,6 +22,8 @@ rbac:
 
 logLevel: INFO
 
+ignoreUnsuccessfulSnapshots: false
+
 resources:
   limits:
     cpu: 100m
