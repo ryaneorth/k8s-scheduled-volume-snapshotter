@@ -10,6 +10,8 @@ You will need to have the `VolumeSnapshot` custom resource definition installed 
 
 The Scheduled Volume Snapshotter works with `v1alpha1` (Kubernetes 1.12 - 1.16), `v1beta1` (Kubernetes 1.17 - 1.19), and `v1` (Kubernetes >= 1.20) versions of the `VolumeSnapshot` custom resource.
 
+As of version `v0.16.0`, Docker images published are compatible with both amd64 and arm64 architectures.
+
 ## Installation
 The easiest way to deploy this operator is using the provided [Helm chart](./helm/charts/scheduled-volume-snapshotter):
 
