@@ -2,6 +2,8 @@
 cronLabels: {}
   #key: "value"
 
+useArgoCD: false
+
 image:
   repository: ryaneorth/scheduled-volume-snapshotter
   #tag: latest
