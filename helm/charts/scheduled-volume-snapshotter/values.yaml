@@ -26,6 +26,8 @@ logLevel: INFO
 
 ignoreUnsuccessfulSnapshots: false
 
+maxSnapshotCount: 0
+
 resources:
   limits:
     cpu: 100m

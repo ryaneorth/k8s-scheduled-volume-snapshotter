@@ -52,4 +52,6 @@ spec:
                   value: "{{ .Values.logLevel }}"
                 - name: IGNORE_UNSUCCESSFUL_SNAPSHOTS
                   value: "{{ .Values.ignoreUnsuccessfulSnapshots }}"
+                - name: MAX_SNAPHOT_COUNT
+                  value: "{{ .Values.maxSnapshotCount | default 0 }}"
           restartPolicy: Never

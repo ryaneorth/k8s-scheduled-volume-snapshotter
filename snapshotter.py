@@ -14,6 +14,7 @@ K8S_VERSION_INFO = kubernetes.client.VersionApi().get_code()
 K8S_MAJOR_VERSION = int(re.split('[^0-9]', K8S_VERSION_INFO.major)[0])
 K8S_MINOR_VERSION = int(re.split('[^0-9]', K8S_VERSION_INFO.minor)[0])
 IGNORE_UNSUCCESSFUL_SNAPSHOTS = os.getenv('IGNORE_UNSUCCESSFUL_SNAPSHOTS', 'false').lower() == 'true'
+MAX_SNAPSHOT_COUNT = os.getenv('MAX_SNAPSHOT_COUNT', 0)
 
 SVS_CRD_GROUP = 'k8s.ryanorth.io'
 SVS_CRD_VERSION = 'v1beta1'
@@ -163,6 +164,7 @@ def cleanup_old_snapshots(scheduled_snapshot, existing_snapshots):
 
 
 def main():
+    count = 0
     for namespace in v1.list_namespace().items:
         if namespace.status.phase == 'Active':
             scheduled_snapshots = custom_api.list_namespaced_custom_object(
@@ -177,8 +179,11 @@ def main():
                 VS_CRD_PLURAL).get('items', [])
             for scheduled_snapshot in scheduled_snapshots:
                 existing_snapshots = get_associated_snapshots(scheduled_snapshot, volume_snapshots)
-                if new_snapshot_needed(scheduled_snapshot, existing_snapshots):
+                snapshot_needed = new_snapshot_needed(scheduled_snapshot, existing_snapshots)
+                snapshot_allowed = MAX_SNAPSHOT_COUNT == 0 or count < MAX_SNAPSHOT_COUNT
+                if snapshot_needed and snapshot_allowed:
                     create_new_snapshot(scheduled_snapshot)
+                    count = count + 1
                 cleanup_old_snapshots(scheduled_snapshot, existing_snapshots)
 
 
