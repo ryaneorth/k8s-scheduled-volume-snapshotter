@@ -2,5 +2,5 @@ apiVersion: v2
 name: scheduled-volume-snapshotter
 description: A Helm chart for deploying the scheduled volume snapshotter
 type: application
-version: 0.17.0
-appVersion: 0.17.0
+version: 0.18.0
+appVersion: 0.18.0
