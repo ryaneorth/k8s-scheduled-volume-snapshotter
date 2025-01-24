@@ -14,7 +14,7 @@ K8S_VERSION_INFO = kubernetes.client.VersionApi().get_code()
 K8S_MAJOR_VERSION = int(re.split('[^0-9]', K8S_VERSION_INFO.major)[0])
 K8S_MINOR_VERSION = int(re.split('[^0-9]', K8S_VERSION_INFO.minor)[0])
 IGNORE_UNSUCCESSFUL_SNAPSHOTS = os.getenv('IGNORE_UNSUCCESSFUL_SNAPSHOTS', 'false').lower() == 'true'
-MAX_SNAPSHOT_COUNT = os.getenv('MAX_SNAPSHOT_COUNT', 0)
+MAX_SNAPSHOT_COUNT = int(os.getenv('MAX_SNAPSHOT_COUNT', 0))
 
 SVS_CRD_GROUP = 'k8s.ryanorth.io'
 SVS_CRD_VERSION = 'v1beta1'
